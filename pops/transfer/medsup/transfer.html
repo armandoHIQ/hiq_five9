@@ -1,0 +1,148 @@
+<style type="text/css">
+    body {
+        background-color: lightgreen;
+        font-size: 120%;
+    }
+    table {
+        border-spacing: 10px;
+        padding: 0px;
+    }
+    th {
+        text-align: left;
+    }
+    .label {
+        text-align: right;
+    }
+    .value {
+        font-weight: bold;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .big {
+        font-size: 200%;
+    }
+    .large {
+        font-size: 160%;
+    }
+    .medium {
+        font-size: 110%;
+    }
+    .hidden {
+        display: none;
+    }
+    .top {
+        vertical-align: text-top;
+    }
+    .center {
+        text-align: center;
+    }
+    .red {
+        color: red;
+    }
+    .bg-red {
+        background-color: red;
+    }
+    .pink {
+        color: pink;
+    }
+    div {
+        margin: 2px;
+        padding: 2px;
+    }
+</style>
+<h1> MedSup Lead - Agent Leg </h1>
+<div style='padding: 0px 8px;'>
+    <table>
+        <tr>
+            <td style="width:15%"><b>Caller:</b></td>
+            <td style="width:35%">
+                <font size='+2'><b>@Customer.first_name@ @Customer.last_name@</b></font>
+            </td>
+            <td style="width:15%"><b>Customer ID:</b></td>
+            <td>@Customer.CustomerID@</td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>DOB:</b></td>
+            <td>@Customer.DoB@</td>
+            <td style="width:15%"><b>Affinity:</b></td>
+            <td>@Customer.Affinity@</td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>State:</b></td>
+            <td>@Customer.state@</td>
+            <td style="width:15%"></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<hr>
+<div>
+    <h1>Transfer Notes</h1>
+    <table>
+        <tr>
+            <td><b>State:</b></td>
+            <td id="state_val"></td>
+        </tr>
+        <tr>
+            <td><b>DOB:</b></td>
+            <td id="dob_val"></td>
+        </tr>
+        <tr>
+            <td><b>Income:</b></td>
+            <td id="income_val"></td>
+        </tr>
+        <tr>
+            <td><b>Existing Policy:</b></td>
+            <td id="existing_policy_val"></td>
+        </tr>
+        <tr>
+            <td><b>Enrolled in Medicaid:</b></td>
+            <td id="existing_medicaid_val"></td>
+        </tr>
+        <tr>
+            <td><b>Seeking:</b></td>
+            <td id="seek_val"></td>
+        </tr>
+        <tr>
+            <td><b>Notes:</b></td>
+            <td id="notes_val"></td>
+        </tr>
+    </table>
+    </form>
+</div>
+<script>
+    function writeVal(id, val) {
+        document.getElementById(id).innerText = val
+    }
+    let SALESFORCE_ID = '@Customer.salesforce_id@' // '00Q1P00000tnf7vUAA'
+    fetch('https://five9.external.healthiq.com/dialer/api/v1/contact_data/' + SALESFORCE_ID + '?tag=CONTACT_DATA', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic PUTAUTHHERE'
+        }
+    })
+        .then((response) => {
+            return response.json()
+        })
+        .then((call_data) => {
+            if (!call_data.Result) {
+                console.log(call_data)
+                let isq_notes = call_data.isq_notes
+                writeVal('state_val', isq_notes.xfer_state)
+                writeVal('dob_val', isq_notes.xfer_dob)
+                writeVal('income_val', isq_notes.xfer_income)
+                writeVal('existing_policy_val', isq_notes.xfer_existing_policy)
+                writeVal('existing_medicaid_val', isq_notes.xfer_existing_medicaid)
+                writeVal('seek_val', isq_notes.xfer_seek_type)
+                writeVal('notes_val', isq_notes.xfer_notes)
+            } else {
+                throw call_data.Result
+            }
+        })
+        .catch((e) => {
+            console.error('Error getting xfer notes:', e)
+            alert('Error getting transfer notes:\n' + e)
+        })
+</script>
