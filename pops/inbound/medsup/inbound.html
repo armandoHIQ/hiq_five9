@@ -259,6 +259,7 @@
         document.getElementById('sdr_submit').innerHTML = "Writing ..."
         let SALESFORCE_ID = '@Customer.salesforce_id@'
         form_data.utm_source = '@Customer.UTM Source@'
+        form_data.direction = 'Inbound';
         return new Promise(async function (resolve, reject) {
             try {
                 let hsvcBaseUrl = "https://five9.external.healthiq.com/dialer"
