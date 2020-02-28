@@ -263,10 +263,11 @@
 
 <script>
     function submitForm(form_data) {
-        console.log('Submitting Form:', form_data)
-        document.getElementById('sdr_submit').innerHTML = "Writing ..."
-        let SALESFORCE_ID = '@Customer.salesforce_id@'
-        form_data.utm_source = '@Customer.UTM Source@'
+        console.log('Submitting Form:', form_data);
+        document.getElementById('sdr_submit').innerHTML = "Writing ...";
+        let SALESFORCE_ID = '@Customer.salesforce_id@';
+        orm_data.utm_source = '@Customer.UTM Source@';
+        form_data.call_direction = 'Outbound';
         return new Promise(async function (resolve, reject) {
             try {
                 let hsvcBaseUrl = "https://five9.external.healthiq.com/dialer"
