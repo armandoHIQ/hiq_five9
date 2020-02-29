@@ -1,0 +1,161 @@
+<style type="text/css">
+    body {
+        background-color: lightyellow;
+        font-size: 120%;
+    }
+
+    table {
+        border-spacing: 10px;
+        padding: 0px;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    .label {
+        text-align: right;
+    }
+
+    .value {
+        font-weight: bold;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .big {
+        font-size: 200%;
+    }
+
+    .large {
+        font-size: 160%;
+    }
+
+    .medium {
+        font-size: 110%;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .top {
+        vertical-align: text-top;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .bg-red {
+        background-color: red;
+    }
+
+    .pink {
+        color: pink;
+    }
+
+    div {
+        margin: 2px;
+        padding: 2px;
+    }
+</style>
+<h1> Medicare Call - CUSTOMER CALLING INBOUND </h1>
+
+<hr>
+<div style='padding: 0px 8px;'>
+    <table>
+        <tr>
+            <td style="width:15%"><b>Medicare Advantage Compliant:</b></td>
+            <td style="width:35%">
+                <font size='+2'><b>@Customer.LeadCompliance@</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>Caller:</b></td>
+            <td style="width:35%">
+                <font size='+2'><a href="https://hiq--c.visualforce.com/apex/Kiss#/lead/@Customer.salesforce_id@"><b>@Customer.first_name@ @Customer.last_name@</b></a></font>
+            </td>
+            <td style="width:15%"><b>Customer ID:</b></td>
+            <td><a href="https://hiq.my.salesforce.com/@Customer.salesforce_id@" target="_blank">@Customer.CustomerID@</a></td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>ZIP:</b></td>
+            <td>@Customer.zip@</td>
+            <td style="width:15%"><b>State:</b></td>
+            <td>@Customer.state@</td>
+            <td style="width:15%"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>Elite Quiz Verified:</b></td>
+            <td style="width:35%"><b>@Customer.EliteQuizVerified@</b></td>
+        </tr>
+    </table>
+</div>
+<hr>
+<div>
+    <h1>Notes from Previous Transfer</h1>
+    <table>
+        <tr>
+            <td><b>State:</b></td>
+            <td id="state_val"></td>
+        </tr>
+        <tr>
+            <td><b>Enrolled in Medicare PARTS A & B:</b></td>
+            <td id="existing_medicare_val"></td>
+        </tr>
+        <tr>
+            <td><b>Will you have it in the next 6 months:</b></td>
+            <td id="medicare_in6_val"></td>
+        </tr>
+        <tr>
+            <td><b>Currently receiving a low-income subsidy:</b></td>
+            <td id="existing_subsidy_val"></td>
+        </tr>
+        <tr>
+            <td><b>Notes:</b></td>
+            <td id="notes_val"></td>
+        </tr>
+    </table>
+</div>
+<script>
+    function writeVal(id, val) {
+        document.getElementById(id).innerText = val
+    }
+    let SALESFORCE_ID = '@Customer.salesforce_id@' // '00Q1P00000tnf7vUAA'
+    fetch('https://five9.external.healthiq.com/dialer/api/v1/contact_data/' + SALESFORCE_ID + '?tag=CONTACT_DATA', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic PUTAUTHHERE'
+        }
+    })
+        .then((response) => {
+            return response.json()
+        })
+        .then((call_data) => {
+            if (!call_data.Result) {
+                console.log(call_data);
+                let xfer_notes = call_data.isq_notes === undefined ? call_data : call_data.isq_notes;
+                writeVal('call_direction', xfer_notes.xfer_call_direction);
+                writeVal('state_val', xfer_notes.xfer_state);
+                writeVal('existing_medicare_val', xfer_notes.xfer_existing_medicare);
+                writeVal('medicare_in6_val', xfer_notes.xfer_medicare_in6);
+                writeVal('existing_subsidy_val', xfer_notes.xfer_existing_subsidy);
+                writeVal('notes_val', xfer_notes.xfer_notes)
+            } else {
+                throw call_data.Result
+            }
+        })
+        .catch((e) => {
+            console.error('Error getting xfer notes:', e)
+            alert('Error getting transfer notes:\n' + e)
+        })
+</script>
