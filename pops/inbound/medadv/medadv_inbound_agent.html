@@ -13,54 +13,6 @@
         text-align: left;
     }
 
-    .label {
-        text-align: right;
-    }
-
-    .value {
-        font-weight: bold;
-    }
-
-    .bold {
-        font-weight: bold;
-    }
-
-    .big {
-        font-size: 200%;
-    }
-
-    .large {
-        font-size: 160%;
-    }
-
-    .medium {
-        font-size: 110%;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .top {
-        vertical-align: text-top;
-    }
-
-    .center {
-        text-align: center;
-    }
-
-    .red {
-        color: red;
-    }
-
-    .bg-red {
-        background-color: red;
-    }
-
-    .pink {
-        color: pink;
-    }
-
     div {
         margin: 2px;
         padding: 2px;
@@ -129,8 +81,8 @@
     function writeVal(id, val) {
         document.getElementById(id).innerText = val
     }
-    let SALESFORCE_ID = '@Customer.salesforce_id@' // '00Q1P00000tnf7vUAA'
-    fetch('https://five9.external.healthiq.com/dialer/api/v1/contact_data/' + SALESFORCE_ID + '?tag=CONTACT_DATA', {
+    let number1 = '@Customer.number1@';
+    fetch('https://five9.external.healthiq.com/dialer/api/v1/contact_data/' + number1 + '?tag=CONTACT_DATA', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
