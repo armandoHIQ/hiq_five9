@@ -328,6 +328,8 @@
         let number1 = '@Customer.number1@';
         form_data.utm_source = '@Customer.UTM Source@';
         form_data.xfer_call_direction = 'Outbound';
+        form_data.lead_id = '@Customer.SF_LeadID@';
+        form_data.opportunity_id = '@Customer.SF_OpportunityID@';
         return new Promise(async function (resolve, reject) {
             try {
                 let hsvcBaseUrl = "https://five9.external.healthiq.com/dialer"
