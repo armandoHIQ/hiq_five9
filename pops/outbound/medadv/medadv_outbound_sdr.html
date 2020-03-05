@@ -19,14 +19,16 @@
     }
 </style>
 <h1> OUTBOUND Medicare Call </h1>
-<h1> Medicare Lead > Speed Dial 005 </h1>
+<h1> Medicare Lead </h1>
 <hr>
 <div style='padding: 0px 8px;'>
     <table>
         <tr>
             <td style="width:15%"><b>Medicare Advantage Compliant:</b></td>
             <td style="width:35%">
-                <font size='+2'><b>@Customer.LeadCompliance@</b></font>
+                <font size='+2'><b>
+                    <span id="ComVal"></span>
+                </b></font>
             </td>
         </tr>
         <tr>
@@ -157,6 +159,13 @@
 </div>
 
 <script>
+    var leadComplianceValue = "No";
+    var leadComplianceInput = "@Customer.LeadCompliance@";
+    if ( leadComplianceInput.search('Medicare Advantage Compliant') !== -1 ) {
+        leadComplianceValue = "Yes";
+    }
+    document.getElementById("ComVal").innerHTML = leadComplianceValue;
+
     function submitForm(form_data) {
         console.log('Submitting Form:', form_data);
         document.getElementById('sdr_submit').innerHTML = "Writing ...";
