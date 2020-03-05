@@ -1,0 +1,234 @@
+<style type="text/css">
+    body {
+        background-color: lightgreen;
+        font-size: 120%;
+    }
+
+    table {
+        border-spacing: 10px;
+        padding: 0px;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    div {
+        margin: 2px;
+        padding: 2px;
+    }
+</style>
+<h1> OUTBOUND Medicare Call </h1>
+<h1> Medicare Lead </h1>
+<hr>
+<div style='padding: 0px 8px;'>
+    <table>
+        <tr>
+            <td style="width:15%"><b>Medicare Advantage Compliant:</b></td>
+            <td style="width:35%">
+                <font size='+2'><b>
+                    <span id="ComVal"></span>
+                </b></font>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>Caller:</b></td>
+            <td style="width:35%">
+                <font size='+2'><a href="https://hiq--c.visualforce.com/apex/Kiss#/lead/@Customer.salesforce_id@" target="_blank"><b>@Customer.first_name@ @Customer.last_name@</b></a></font>
+            </td>
+            <td style="width:15%"><b>Customer ID:</b></td>
+            <td><a href="https://hiq.my.salesforce.com/@Customer.salesforce_id@" target="_blank">@Customer.CustomerID@</a></td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>ZIP:</b></td>
+            <td>@Customer.zip@</td>
+            <td style="width:15%"><b>State:</b></td>
+            <td>@Customer.state@</td>
+            <td style="width:15%"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>Elite Quiz Verified:</b></td>
+            <td style="width:35%"><b>@Customer.EliteQuizVerified@</b></td>
+        </tr>
+    </table>
+</div>
+<hr>
+<div>
+    <form name="sdr_form">
+        <table style="width:65%">
+            <tr>
+                <th style="width:25%">Can you please confirm which state you live in?</th>
+                <td style="width:25%">
+                    <select name='xfer_state' placeholder='Select State' style="font-size:14px;" required>
+                        <option value='AL'>AL</option>
+                        <option value='AK'>AK</option>
+                        <option value='AZ'>AZ</option>
+                        <option value='AR'>AR</option>
+                        <option value='CA'>CA</option>
+                        <option value='CO'>CO</option>
+                        <option value='CT'>CT</option>
+                        <option value='DE'>DE</option>
+                        <option value='FL'>FL</option>
+                        <option value='GA'>GA</option>
+                        <option value='HI'>HI</option>
+                        <option value='ID'>ID</option>
+                        <option value='IL'>IL</option>
+                        <option value='IN'>IN</option>
+                        <option value='IA'>IA</option>
+                        <option value='KS'>KS</option>
+                        <option value='KY'>KY</option>
+                        <option value='LA'>LA</option>
+                        <option value='ME'>ME</option>
+                        <option value='MD'>MD</option>
+                        <option value='MA'>MA</option>
+                        <option value='MI'>MI</option>
+                        <option value='MN'>MN</option>
+                        <option value='MS'>MS</option>
+                        <option value='MO'>MO</option>
+                        <option value='MT'>MT</option>
+                        <option value='NE'>NE</option>
+                        <option value='NV'>NV</option>
+                        <option value='NH'>NH</option>
+                        <option value='NJ'>NJ</option>
+                        <option value='NM'>NM</option>
+                        <option value='NY'>NY</option>
+                        <option value='NC'>NC</option>
+                        <option value='ND'>ND</option>
+                        <option value='OH'>OH</option>
+                        <option value='OK'>OK</option>
+                        <option value='OR'>OR</option>
+                        <option value='PA'>PA</option>
+                        <option value='RI'>RI</option>
+                        <option value='SC'>SC</option>
+                        <option value='SD'>SD</option>
+                        <option value='TN'>TN</option>
+                        <option value='TX'>TX</option>
+                        <option value='UT'>UT</option>
+                        <option value='VT'>VT</option>
+                        <option value='VA'>VA</option>
+                        <option value='WA'>WA</option>
+                        <option value='WV'>WV</option>
+                        <option value='WI'>WI</option>
+                        <option value='WY'>WY</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>If they live in NY state:</th>
+                <td>
+                    New York Law requires us to let you know you have the option to be added to our Do Not Call List at anytime. But, if you do, we won’t be able to contact you about the Medicare Plans you’re interested in.<br>
+                    <input name='xfer_asked_dnc' style="font-size:14px;" type='checkbox' value='1'>&nbsp;Read Statement</input>
+                </td>
+            </tr>
+            <tr>
+                <th>Are you currently enrolled in Medicare PARTS A & B?</th>
+                <td><input name='xfer_existing_medicare' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_existing_medicare' type='radio' value='No'>&nbsp;No
+                </td>
+            </tr>
+            <tr>
+                <th>If no, will you have it in the next 6 months?</th>
+                <td><input name='xfer_medicare_in6' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_medicare_in6' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <th>If yes, are you currently receiving a low-income subsidy such as Medicaid oe Extra Help?</th>
+                <td><input name='xfer_existing_subsidy' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_existing_subsidy' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <th>Notes:</th>
+                <td><textarea name='xfer_notes' style='width: 100%; height: 100px;' maxlength='255'
+                              placeholder='Paste notes...' autocomplete='off'></textarea></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <button id="sdr_submit"
+                            style="font-size:16px; padding: 10px 24px; border: 1px solid black; border-radius: 12px">
+                        <b>SUBMIT</b>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<b>Then COLD Conference using Speed Dials</b>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script>
+    var leadComplianceValue = "No";
+    var leadComplianceInput = "@Customer.LeadCompliance@";
+    if ( leadComplianceInput.search('Medicare Advantage Compliant') != -1 ) {
+        leadComplianceValue = "Yes";
+    }
+    document.getElementById("ComVal").innerHTML = leadComplianceValue;
+
+    function submitForm(form_data) {
+        console.log('Submitting Form:', form_data);
+        document.getElementById('sdr_submit').innerHTML = "Writing ...";
+        let number1 = '@Customer.number1@';
+        form_data.utm_source = '@Customer.UTM Source@';
+        form_data.xfer_call_direction = 'Outbound';
+        form_data.lead_id = '@Customer.SF_LeadID@';
+        form_data.opportunity_id = '@Customer.SF_OpportunityID@';
+        return new Promise(async function (resolve, reject) {
+            try {
+                let hsvcBaseUrl = "https://five9.external.healthiq.com/dialer";
+                let payload = {
+                    contact_id: number1,
+                    tag: 'CONTACT_DATA',
+                    data: {
+                        isq_notes: form_data
+                    }
+                }
+//                console.log(payload)
+                let response = await fetch(hsvcBaseUrl + '/api/v1/contact_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic PUAUTHHERE'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                console.log('submit form response', response)
+                document.getElementById('sdr_submit').innerHTML = "Posted"
+                resolve()
+            } catch (e) {
+                console.error('Error submitting form:', e)
+                document.getElementById('sdr_submit').innerHTML = "Failed"
+                reject(e)
+            }
+        })
+    }
+
+    document.sdr_form.addEventListener('submit', async function (event) {
+        event.preventDefault()
+        let responses = document.sdr_form.elements
+        // console.log('SDR Form Responses:', responses)
+        let data = {}
+        for (let i = 0; i < responses.length; i++) {
+            if (
+                (responses[i].type == 'select-one' && responses[i].value && responses[i].value != '')
+                || (responses[i].type == 'text' && responses[i].value && responses[i].value != '')
+                || (responses[i].type == 'radio' && responses[i].checked)
+                || (responses[i].type == 'textarea')
+                || (responses[i].type == 'checkbox' && responses[i].checked)
+            ) {
+                data[responses[i].name] = responses[i].value
+            } else if (responses[i].type == 'date') {
+                let dateSplit = responses[i].value.split('-')
+                data[responses[i].name] = dateSplit[1] + '/' + dateSplit[2] + '/' + dateSplit[0]
+            }
+            responses[i].disabled = true
+        }
+        try {
+            await submitForm(data)
+            document.getElementById('sdr_submit').disabled = true
+        } catch (e) {
+            //
+        }
+    })
+</script>
