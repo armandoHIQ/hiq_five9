@@ -1,0 +1,437 @@
+<style type="text/css">
+    body {
+        background-color: #E0E0E0;
+        font-size: 120%;
+    }
+
+    table {
+        border-spacing: 10px;
+        padding: 0px;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    .label {
+        text-align: right;
+    }
+
+    .value {
+        font-weight: bold;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .big {
+        font-size: 200%;
+    }
+
+    .large {
+        font-size: 160%;
+    }
+
+    .medium {
+        font-size: 110%;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .top {
+        vertical-align: text-top;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .bg-red {
+        background-color: red;
+    }
+
+    .pink {
+        color: pink;
+    }
+
+    div {
+        margin: 2px;
+        padding: 2px;
+    }
+</style>
+<div style='padding: 0px 8px;'>
+    <table>
+        <tr>
+            <td style="width:15%"><b>Caller:</b></td>
+            <td style="width:35%">
+                <font size='+2'><b>@Customer.first_name@ @Customer.last_name@</b></font>
+            </td>
+            <td style="width:15%"><b>Customer ID:</b></td>
+            <td>@Customer.CustomerID@</td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>DOB:</b></td>
+            <td>@Customer.DoB@</td>
+            <td style="width:15%"><b>Affinity:</b></td>
+            <td>@Customer.Affinity@</td>
+        </tr>
+        <tr>
+            <td style="width:15%"><b>State:</b></td>
+            <td>@Customer.state@</td>
+            <td style="width:15%"></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<hr>
+<table>
+    <td>1. Complete questionaire</td>
+    <td>2. Write notes in MAX Disposition Notes</td>
+    <td>3. Copy & paste notes here for agent</td>
+    <td><b>4. Submit before starting transfer process</b></td>
+</table>
+<hr>
+<div>
+    <form name="sdr_form">
+        <table style="width:65%">
+            <tr>
+                <th style="width:25%">Can you please confirm which state you live in?</th>
+                <td style="width:25%">
+                    <select name='xfer_state' placeholder='Select State' style="font-size:14px;" required>
+                        <option value='AL'>AL</option>
+                        <option value='AK'>AK</option>
+                        <option value='AZ'>AZ</option>
+                        <option value='AR'>AR</option>
+                        <option value='CA'>CA</option>
+                        <option value='CO'>CO</option>
+                        <option value='CT'>CT</option>
+                        <option value='DE'>DE</option>
+                        <option value='FL'>FL</option>
+                        <option value='GA'>GA</option>
+                        <option value='HI'>HI</option>
+                        <option value='ID'>ID</option>
+                        <option value='IL'>IL</option>
+                        <option value='IN'>IN</option>
+                        <option value='IA'>IA</option>
+                        <option value='KS'>KS</option>
+                        <option value='KY'>KY</option>
+                        <option value='LA'>LA</option>
+                        <option value='ME'>ME</option>
+                        <option value='MD'>MD</option>
+                        <option value='MA'>MA</option>
+                        <option value='MI'>MI</option>
+                        <option value='MN'>MN</option>
+                        <option value='MS'>MS</option>
+                        <option value='MO'>MO</option>
+                        <option value='MT'>MT</option>
+                        <option value='NE'>NE</option>
+                        <option value='NV'>NV</option>
+                        <option value='NH'>NH</option>
+                        <option value='NJ'>NJ</option>
+                        <option value='NM'>NM</option>
+                        <option value='NY'>NY</option>
+                        <option value='NC'>NC</option>
+                        <option value='ND'>ND</option>
+                        <option value='OH'>OH</option>
+                        <option value='OK'>OK</option>
+                        <option value='OR'>OR</option>
+                        <option value='PA'>PA</option>
+                        <option value='RI'>RI</option>
+                        <option value='SC'>SC</option>
+                        <option value='SD'>SD</option>
+                        <option value='TN'>TN</option>
+                        <option value='TX'>TX</option>
+                        <option value='UT'>UT</option>
+                        <option value='VT'>VT</option>
+                        <option value='VA'>VA</option>
+                        <option value='WA'>WA</option>
+                        <option value='WV'>WV</option>
+                        <option value='WI'>WI</option>
+                        <option value='WY'>WY</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>If they live in NY state:</th>
+                <td>
+                    New York Law requires us to let you know you have the option to be added to our Do Not Call List at anytime. But, if you do, we won’t be able to contact you about the life insurance you’re interested in.<br>
+                    <input name='xfer_asked_dnc' style="font-size:14px;" type='checkbox' value='1'>&nbsp;Read Statement</input>
+                </td>
+            </tr>
+            <tr>
+                <th>Do you know how much coverage you are looking for?</th>
+                <td>
+                    <select name='xfer_coverage' style="font-size:14px;" required>
+                        <option value='Unknown'>Unknown</option>
+                        <option value='100k'>100k</option>
+                        <option value='150k'>150k</option>
+                        <option value='200k'>200k</option>
+                        <option value='250k'>250k</option>
+                        <option value='300k'>300k</option>
+                        <option value='350k'>350k</option>
+                        <option value='400k'>400k</option>
+                        <option value='450k'>450k</option>
+                        <option value='500k'>500k</option>
+                        <option value='550k'>550k</option>
+                        <option value='600k'>600k</option>
+                        <option value='650k'>650k</option>
+                        <option value='700k'>700k</option>
+                        <option value='750k'>750k</option>
+                        <option value='800k'>800k</option>
+                        <option value='850k'>850k</option>
+                        <option value='900k'>900k</option>
+                        <option value='950k'>950k</option>
+                        <option value='1M'>1M</option>
+                        <option value='1.5M'>1.5M</option>
+                        <option value='2M'>2M</option>
+                        <option value='2.5M'>2.5M</option>
+                        <option value='3M'>3M</option>
+                        <option value='3.5M'>3.5M</option>
+                        <option value='4M'>4M</option>
+                        <option value='4.5M'>4.5M</option>
+                        <option value='5M+'>5M+</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Do you have an existing policy?</th>
+                <td><input name='xfer_existing_policy' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input
+                        name='xfer_existing_policy' type='radio' value='No'>&nbsp;No</td>
+            </tr>
+            <tr id='xfer_existing_policy_goal'>
+                <th style='padding-left: 2vh;'><i>If yes:</i> Is your main goal to add to, or replace your current
+                    policy?</th>
+                <td><input name='xfer_existing_policy_intent' style="font-size:14px;" type='radio' value='Add'>&nbsp;Add
+                    to&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_existing_policy_intent' type='radio'
+                           value='Replace'>&nbsp;Replace&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_existing_policy_intent'
+                           type='radio' value='N/A' checked>&nbsp;N/A
+                </td>
+            </tr>
+            <tr>
+                <th>What is your annual income before taxes?</th>
+                <td>
+                    <select name='xfer_income' style="font-size:14px;" required>
+                        <option value='0'>0</option>
+                        <option value='5k'>5k</option>
+                        <option value='10k'>10k</option>
+                        <option value='15k'>15k</option>
+                        <option value='20k'>20k</option>
+                        <option value='25k'>25k</option>
+                        <option value='30k'>30k</option>
+                        <option value='35k'>35k</option>
+                        <option value='40k'>40k</option>
+                        <option value='45k'>45k</option>
+                        <option value='50k'>50k</option>
+                        <option value='55k'>55k</option>
+                        <option value='60k'>60k</option>
+                        <option value='65k'>65k</option>
+                        <option value='70k'>70k</option>
+                        <option value='75k'>75k</option>
+                        <option value='80k'>80k</option>
+                        <option value='85k'>85k</option>
+                        <option value='90k'>90k</option>
+                        <option value='95k'>95k</option>
+                        <option value='100k'>100k</option>
+                        <option value='105k'>105k</option>
+                        <option value='110k'>110k</option>
+                        <option value='115k'>115k</option>
+                        <option value='120k'>120k</option>
+                        <option value='125k'>125k</option>
+                        <option value='130k'>130k</option>
+                        <option value='135k'>135k</option>
+                        <option value='140k'>140k</option>
+                        <option value='145k'>145k</option>
+                        <option value='150k'>150k</option>
+                        <option value='155k'>155k</option>
+                        <option value='160k'>160k</option>
+                        <option value='165k'>165k</option>
+                        <option value='170k'>170k</option>
+                        <option value='175k'>175k</option>
+                        <option value='180k'>180k</option>
+                        <option value='185k'>185k</option>
+                        <option value='190k'>190k</option>
+                        <option value='195k'>195k</option>
+                        <option value='200k'>200k</option>
+                        <option value='205k'>205k</option>
+                        <option value='210k'>210k</option>
+                        <option value='215k'>215k</option>
+                        <option value='220k'>220k</option>
+                        <option value='225k'>225k</option>
+                        <option value='230k'>230k</option>
+                        <option value='235k'>235k</option>
+                        <option value='240k'>240k</option>
+                        <option value='245k'>245k</option>
+                        <option value='250k+'>250k+</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th style='padding-left: 2vh;'><i>If income is under 100K:</i> Is any part of that coming through
+                    pension, disability, or the VA?</th>
+                <td><input name='xfer_income_pension_used' type='radio' style="font-size:14px;"
+                           value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input name='xfer_income_pension_used' type='radio'
+                                                                               value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;<input name='xfer_income_pension_used' type='radio'
+                                                                                                                                 value='N/A' checked>&nbsp;N/A</td>
+            </tr>
+            <tr>
+                <th style='padding-left: 4vh;'><i>If yes:</i> How much?</th>
+                <td>
+                    <select name='xfer_income_pension' style="font-size:14px;">
+                        <option value='0'>0</option>
+                        <option value='1k'>1k</option>
+                        <option value='2k'>2k</option>
+                        <option value='3k'>3k</option>
+                        <option value='4k'>4k</option>
+                        <option value='5k'>5k</option>
+                        <option value='6k'>6k</option>
+                        <option value='7k'>7k</option>
+                        <option value='8k'>8k</option>
+                        <option value='9k'>9k</option>
+                        <option value='10k'>10k</option>
+                        <option value='11k'>11k</option>
+                        <option value='12k'>12k</option>
+                        <option value='13k'>13k</option>
+                        <option value='14k'>14k</option>
+                        <option value='15k'>15k</option>
+                        <option value='16k'>16k</option>
+                        <option value='17k'>17k</option>
+                        <option value='18k'>18k</option>
+                        <option value='19k'>19k</option>
+                        <option value='20k'>20k</option>
+                        <option value='21k'>21k</option>
+                        <option value='22k'>22k</option>
+                        <option value='23k'>23k</option>
+                        <option value='24k'>24k</option>
+                        <option value='25k'>25k</option>
+                        <option value='26k'>26k</option>
+                        <option value='27k'>27k</option>
+                        <option value='28k'>28k</option>
+                        <option value='29k'>29k</option>
+                        <option value='30k'>30k</option>
+                        <option value='31k'>31k</option>
+                        <option value='32k'>32k</option>
+                        <option value='33k'>33k</option>
+                        <option value='34k'>34k</option>
+                        <option value='35k'>35k</option>
+                        <option value='36k'>36k</option>
+                        <option value='37k'>37k</option>
+                        <option value='38k'>38k</option>
+                        <option value='39k'>39k</option>
+                        <option value='40k'>40k</option>
+                        <option value='41k'>41k</option>
+                        <option value='42k'>42k</option>
+                        <option value='43k'>43k</option>
+                        <option value='44k'>44k</option>
+                        <option value='45k'>45k</option>
+                        <option value='46k'>46k</option>
+                        <option value='47k'>47k</option>
+                        <option value='48k'>48k</option>
+                        <option value='49k'>49k</option>
+                        <option value='50k+'>50k+</option>
+                    </select>
+                </td>
+            </tr>
+            <tr id='xfer_currently_employed'>
+                <th style='padding-left: 4vh;'><i>If yes:</i> Are you currently employed?</th>
+                <td><input name='xfer_currently_employed' type='radio' value='Yes' style="font-size:14px;"
+                           checked>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input name='xfer_currently_employed' type='radio'
+                                                                           value='No'>&nbsp;No</td>
+            </tr>
+            <tr>
+                <th>Lastly, can you please confirm your date of birth?</th>
+                <td><input name='xfer_dob' style="font-size:14px;" placeholder='mm/dd/yyyy' type='text' autocomplete='off' required></td>
+            </tr>
+            <tr>
+                <th>Notes:</th>
+                <td><textarea name='xfer_notes' style='width: 100%; height: 100px;' maxlength='255'
+                              placeholder='Paste notes...' autocomplete='off'></textarea></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <button id="sdr_submit"
+                            style="font-size:16px; padding: 10px 24px; border: 1px solid black; border-radius: 12px">
+                        <b>SUBMIT</b>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<b>Then COLD Conference using Speed Dials</b>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script>
+    function submitForm(form_data) {
+        console.log('Submitting Form:', form_data);
+        document.getElementById('sdr_submit').innerHTML = "Writing ...";
+        let SALESFORCE_ID = '@Customer.salesforce_id@';
+        form_data.utm_source = '@Customer.UTM Source@';
+        form_data.xfer_call_direction = 'Outbound';
+        form_data.xfer_dial_campaign = 'Life OB SDR LTD';
+        return new Promise(async function (resolve, reject) {
+            try {
+                let hsvcBaseUrl = "https://five9.external.healthiq.com/dialer"
+                let payload = {
+                    contact_id: SALESFORCE_ID,
+                    tag: 'CONTACT_DATA',
+                    data: {
+                        isq_notes: form_data
+                    }
+                }
+//                console.log(payload)
+                let response = await fetch(hsvcBaseUrl + '/api/v1/contact_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic PUTAUTHHERE'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                console.log('submit form response', response)
+                document.getElementById('sdr_submit').innerHTML = "Posted"
+                resolve()
+            } catch (e) {
+                console.error('Error submitting form:', e)
+                document.getElementById('sdr_submit').innerHTML = "Failed"
+                reject(e)
+            }
+        })
+    }
+
+    document.sdr_form.addEventListener('submit', async function (event) {
+        event.preventDefault()
+        let responses = document.sdr_form.elements
+        // console.log('SDR Form Responses:', responses)
+        let data = {}
+        for (let i = 0; i < responses.length; i++) {
+            if (
+                (responses[i].type == 'select-one' && responses[i].value && responses[i].value != '')
+                || (responses[i].type == 'text' && responses[i].value && responses[i].value != '')
+                || (responses[i].type == 'radio' && responses[i].checked)
+                || (responses[i].type == 'textarea')
+                || (responses[i].type == 'checkbox' && responses[i].checked)
+            ) {
+                data[responses[i].name] = responses[i].value
+            } else if (responses[i].type == 'date') {
+                let dateSplit = responses[i].value.split('-')
+                data[responses[i].name] = dateSplit[1] + '/' + dateSplit[2] + '/' + dateSplit[0]
+            }
+            responses[i].disabled = true
+        }
+        try {
+            await submitForm(data)
+            document.getElementById('sdr_submit').disabled = true
+        } catch (e) {
+            //
+        }
+    })
+</script>
