@@ -169,7 +169,7 @@
     function submitForm(form_data) {
         console.log('Submitting Form:', form_data);
         document.getElementById('sdr_submit').innerHTML = "Writing ...";
-        let number1 = '@Customer.number1@';
+        let SALESFORCE_ID = '@Customer.salesforce_id@' // '00Q1P00000tnf7vUAA'
         form_data.utm_source = '@Customer.UTM Source@';
         form_data.xfer_call_direction = 'Outbound';
         form_data.lead_id = '@Customer.SF_LeadID@';
@@ -189,7 +189,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Basic PUTAUTHHERE'
+                        'Authorization': 'Basic PUTAUTHHERE=='
                     },
                     body: JSON.stringify(payload)
                 })

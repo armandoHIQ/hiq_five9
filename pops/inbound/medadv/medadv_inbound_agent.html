@@ -90,12 +90,12 @@
     function writeVal(id, val) {
         document.getElementById(id).innerText = val
     }
-    let number1 = '@Customer.number1@';
-    fetch('https://five9.external.healthiq.com/dialer/api/v1/contact_data/' + number1 + '?tag=CONTACT_DATA', {
+    let SALESFORCE_ID = '@Customer.salesforce_id@' // '00Q1P00000tnf7vUAA'
+    fetch('https://five9.external.healthiq.com/dialer/api/v1/contact_data/' + SALESFORCE_ID + '?tag=CONTACT_DATA', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Basic PUTAUTHHERE'
+            'Authorization': 'Basic PUTAUTHHERE=='
         }
     })
         .then((response) => {
