@@ -66,38 +66,39 @@
         padding: 2px;
     }
 </style>
-<h1> MedSup Lead > Speed Dial 005 </h1>
+<h1> OUTBOUND Medicare Call </h1>
+<h1> Medicare Lead > Speed Dial 005 </h1>
+<hr>
 <div style='padding: 0px 8px;'>
     <table>
         <tr>
+            <td style="width:15%"><b>Medicare Advantage Compliant:</b></td>
+            <td style="width:35%">
+                <font size='+2'><b>@Customer.LeadCompliance@</b></font>
+            </td>
+        </tr>
+        <tr>
             <td style="width:15%"><b>Caller:</b></td>
             <td style="width:35%">
-                <font size='+2'><b>@Customer.first_name@ @Customer.last_name@</b></font>
+                <font size='+2'><a href="https://hiq--c.visualforce.com/apex/Kiss#/lead/@Customer.salesforce_id@" target="_blank"><b>@Customer.first_name@ @Customer.last_name@</b></a></font>
             </td>
             <td style="width:15%"><b>Customer ID:</b></td>
-            <td>@Customer.CustomerID@</td>
+            <td><a href="https://hiq.my.salesforce.com/@Customer.salesforce_id@" target="_blank">@Customer.CustomerID@</a></td>
         </tr>
         <tr>
-            <td style="width:15%"><b>DOB:</b></td>
-            <td>@Customer.DoB@</td>
-            <td style="width:15%"><b>Affinity:</b></td>
-            <td>@Customer.Affinity@</td>
-        </tr>
-        <tr>
+            <td style="width:15%"><b>ZIP:</b></td>
+            <td>@Customer.zip@</td>
             <td style="width:15%"><b>State:</b></td>
             <td>@Customer.state@</td>
             <td style="width:15%"></td>
             <td></td>
         </tr>
+        <tr>
+            <td style="width:15%"><b>Elite Quiz Verified:</b></td>
+            <td style="width:35%"><b>@Customer.EliteQuizVerified@</b></td>
+        </tr>
     </table>
 </div>
-<hr>
-<table>
-    <td>1. Complete questionaire</td>
-    <td>2. Write notes in MAX Disposition Notes</td>
-    <td>3. Copy & paste notes here for agent</td>
-    <td><b>4. Submit before starting transfer process</b></td>
-</table>
 <hr>
 <div>
     <form name="sdr_form">
@@ -162,91 +163,26 @@
             <tr>
                 <th>If they live in NY state:</th>
                 <td>
-                  New York Law requires us to let you know you have the option to be added to our Do Not Call List at anytime. But, if you do, we won’t be able to contact you about the life insurance you’re interested in.<br>
-                  <input name='xfer_asked_dnc' style="font-size:14px;" type='checkbox' value='1'>&nbsp;Read Statement</input>
-                  </td>
-            </tr>
-            <tr>
-                <th>Can you please confirm your date of birth?</th>
-                <td><input name='xfer_dob' style="font-size:14px;" placeholder='mm/dd/yyyy' type='text' autocomplete='off' required></td>
-            </tr>
-            <tr>
-                <th>What is your annual income before taxes?</th>
-                <td>
-                    <select name='xfer_income' style="font-size:14px;" required>
-                        <option value='0'>0</option>
-                        <option value='5k'>5k</option>
-                        <option value='10k'>10k</option>
-                        <option value='15k'>15k</option>
-                        <option value='20k'>20k</option>
-                        <option value='25k'>25k</option>
-                        <option value='30k'>30k</option>
-                        <option value='35k'>35k</option>
-                        <option value='40k'>40k</option>
-                        <option value='45k'>45k</option>
-                        <option value='50k'>50k</option>
-                        <option value='55k'>55k</option>
-                        <option value='60k'>60k</option>
-                        <option value='65k'>65k</option>
-                        <option value='70k'>70k</option>
-                        <option value='75k'>75k</option>
-                        <option value='80k'>80k</option>
-                        <option value='85k'>85k</option>
-                        <option value='90k'>90k</option>
-                        <option value='95k'>95k</option>
-                        <option value='100k'>100k</option>
-                        <option value='105k'>105k</option>
-                        <option value='110k'>110k</option>
-                        <option value='115k'>115k</option>
-                        <option value='120k'>120k</option>
-                        <option value='125k'>125k</option>
-                        <option value='130k'>130k</option>
-                        <option value='135k'>135k</option>
-                        <option value='140k'>140k</option>
-                        <option value='145k'>145k</option>
-                        <option value='150k'>150k</option>
-                        <option value='155k'>155k</option>
-                        <option value='160k'>160k</option>
-                        <option value='165k'>165k</option>
-                        <option value='170k'>170k</option>
-                        <option value='175k'>175k</option>
-                        <option value='180k'>180k</option>
-                        <option value='185k'>185k</option>
-                        <option value='190k'>190k</option>
-                        <option value='195k'>195k</option>
-                        <option value='200k'>200k</option>
-                        <option value='205k'>205k</option>
-                        <option value='210k'>210k</option>
-                        <option value='215k'>215k</option>
-                        <option value='220k'>220k</option>
-                        <option value='225k'>225k</option>
-                        <option value='230k'>230k</option>
-                        <option value='235k'>235k</option>
-                        <option value='240k'>240k</option>
-                        <option value='245k'>245k</option>
-                        <option value='250k+'>250k+</option>
-                    </select>
+                    New York Law requires us to let you know you have the option to be added to our Do Not Call List at anytime. But, if you do, we won’t be able to contact you about the Medicare Plans you’re interested in.<br>
+                    <input name='xfer_asked_dnc' style="font-size:14px;" type='checkbox' value='1'>&nbsp;Read Statement</input>
                 </td>
             </tr>
             <tr>
-                <th>Do you have an existing Medicare Supplement plan?</th>
-                <td><input name='xfer_existing_policy' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name='xfer_existing_policy' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name='xfer_existing_policy' type='radio' value='Other'>&nbsp;Other
+                <th>Are you currently enrolled in Medicare PARTS A & B?</th>
+                <td><input name='xfer_existing_medicare' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_existing_medicare' type='radio' value='No'>&nbsp;No
                 </td>
             </tr>
             <tr>
-                <th>Are you currently enrolled in Medicaid?</th>
-                <td><input name='xfer_existing_medicaid' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name='xfer_existing_medicaid' type='radio' value='No'>&nbsp;No
+                <th>If no, will you have it in the next 6 months?</th>
+                <td><input name='xfer_medicare_in6' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_medicare_in6' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
             <tr>
-                <th>Are you looking for Medicare insurance or dental or vision?</th>
-                <td><input name='xfer_seek_type' style="font-size:14px;" type='radio' value='Medicare'>&nbsp;Medicare&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name='xfer_seek_type' type='radio' value='Dental'>&nbsp;Dental&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name='xfer_seek_type' type='radio' value='Vision'>&nbsp;Vision&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name='xfer_seek_type' type='radio' value='NotLooking'>&nbsp;Not Looking
+                <th>If yes, are you currently receiving a low-income subsidy such as Medicaid oe Extra Help?</th>
+                <td><input name='xfer_existing_subsidy' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_existing_subsidy' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
             <tr>
