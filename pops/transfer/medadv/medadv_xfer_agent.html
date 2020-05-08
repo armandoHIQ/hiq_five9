@@ -27,17 +27,19 @@
             <td style="width:15%"><b>Medicare Advantage Compliant:</b></td>
             <td style="width:35%">
                 <font size='+2'><b>
-                    <span id="ComVal"></span>
-                </b></font>
+                        <span id="ComVal"></span>
+                    </b></font>
             </td>
         </tr>
         <tr>
             <td style="width:15%"><b>Caller:</b></td>
             <td style="width:35%">
-              <font size='+2'><a href="https://hiq--c.visualforce.com/apex/Kiss#/lead/@Customer.salesforce_id@" target="_blank"><b>@Customer.first_name@ @Customer.last_name@</b></a></font>
-          </td>
-          <td style="width:15%"><b>Customer ID:</b></td>
-          <td><a href="https://hiq.my.salesforce.com/@Customer.salesforce_id@" target="_blank">@Customer.CustomerID@</a></td>
+                <font size='+2'><a href="https://hiq--c.visualforce.com/apex/Kiss#/lead/@Customer.salesforce_id@"
+                        target="_blank"><b>@Customer.first_name@ @Customer.last_name@</b></a></font>
+            </td>
+            <td style="width:15%"><b>Customer ID:</b></td>
+            <td><a href="https://hiq.my.salesforce.com/@Customer.salesforce_id@"
+                    target="_blank">@Customer.CustomerID@</a></td>
         </tr>
         <tr>
             <td style="width:15%"><b>ZIP:</b></td>
@@ -74,6 +76,10 @@
             <td id="existing_subsidy_val"></td>
         </tr>
         <tr>
+            <td><b>Looking to save money on health insurance:</b></td>
+            <td id="save_on_health_ins_val"></td>
+        </tr>
+        <tr>
             <td><b>Notes:</b></td>
             <td id="notes_val"></td>
         </tr>
@@ -82,7 +88,7 @@
 <script>
     var leadComplianceValue = "No";
     var leadComplianceInput = "@Customer.LeadCompliance@";
-    if ( leadComplianceInput.search('Medicare Advantage Compliant') !== -1 ) {
+    if (leadComplianceInput.search('Medicare Advantage Compliant') !== -1) {
         leadComplianceValue = "Yes";
     }
     document.getElementById("ComVal").innerHTML = leadComplianceValue;
@@ -110,6 +116,7 @@
                 writeVal('existing_medicare_val', xfer_notes.xfer_existing_medicare);
                 writeVal('medicare_in6_val', xfer_notes.xfer_medicare_in6);
                 writeVal('existing_subsidy_val', xfer_notes.xfer_existing_subsidy);
+                writeVal('save_on_health_ins_val', xfer_notes.xfer_save_on_health_ins);
                 writeVal('notes_val', xfer_notes.xfer_notes)
             } else {
                 throw call_data.Result

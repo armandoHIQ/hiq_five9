@@ -27,17 +27,19 @@
             <td style="width:15%"><b>Medicare Advantage Compliant:</b></td>
             <td style="width:35%">
                 <font size='+2'><b>
-                    <span id="ComVal"></span>
-                </b></font>
+                        <span id="ComVal"></span>
+                    </b></font>
             </td>
         </tr>
         <tr>
             <td style="width:15%"><b>Caller:</b></td>
             <td style="width:35%">
-                <font size='+2'><a href="https://hiq--c.visualforce.com/apex/Kiss#/lead/@Customer.salesforce_id@" target="_blank"><b>@Customer.first_name@ @Customer.last_name@</b></a></font>
+                <font size='+2'><a href="https://hiq--c.visualforce.com/apex/Kiss#/lead/@Customer.salesforce_id@"
+                        target="_blank"><b>@Customer.first_name@ @Customer.last_name@</b></a></font>
             </td>
             <td style="width:15%"><b>Customer ID:</b></td>
-            <td><a href="https://hiq.my.salesforce.com/@Customer.salesforce_id@" target="_blank">@Customer.CustomerID@</a></td>
+            <td><a href="https://hiq.my.salesforce.com/@Customer.salesforce_id@"
+                    target="_blank">@Customer.CustomerID@</a></td>
         </tr>
         <tr>
             <td style="width:15%"><b>ZIP:</b></td>
@@ -117,38 +119,51 @@
             <tr>
                 <th>If they live in NY state:</th>
                 <td>
-                    New York Law requires us to let you know you have the option to be added to our Do Not Call List at anytime. But, if you do, we won’t be able to contact you about the Medicare Plans you’re interested in.<br>
-                    <input name='xfer_asked_dnc' style="font-size:14px;" type='checkbox' value='1'>&nbsp;Read Statement</input>
+                    New York Law requires us to let you know you have the option to be added to our Do Not Call List at
+                    anytime. But, if you do, we won’t be able to contact you about the Medicare Plans you’re interested
+                    in.<br>
+                    <input name='xfer_asked_dnc' style="font-size:14px;" type='checkbox' value='1'>&nbsp;Read
+                    Statement</input>
                 </td>
             </tr>
             <tr>
                 <th>Are you currently enrolled in Medicare PARTS A & B?</th>
-                <td><input name='xfer_existing_medicare' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                <td><input name='xfer_existing_medicare' style="font-size:14px;" type='radio'
+                        value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
                     <input name='xfer_existing_medicare' type='radio' value='No'>&nbsp;No
                 </td>
             </tr>
             <tr>
                 <th>If no, will you have it in the next 6 months?</th>
-                <td><input name='xfer_medicare_in6' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                <td><input name='xfer_medicare_in6' style="font-size:14px;" type='radio'
+                        value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
                     <input name='xfer_medicare_in6' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
             <tr>
                 <th>If yes, are you currently receiving a low-income subsidy such as Medicaid oe Extra Help?</th>
-                <td><input name='xfer_existing_subsidy' style="font-size:14px;" type='radio' value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                <td><input name='xfer_existing_subsidy' style="font-size:14px;" type='radio'
+                        value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
                     <input name='xfer_existing_subsidy' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <th>Are you still looking to save money on your health insurance?</th>
+                <td><input name='xfer_save_on_health_ins' style="font-size:14px;" type='radio'
+                        value='Yes'>&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name='xfer_save_on_health_ins' type='radio' value='No'>&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
             <tr>
                 <th>Notes:</th>
                 <td><textarea name='xfer_notes' style='width: 100%; height: 100px;' maxlength='255'
-                              placeholder='Paste notes...' autocomplete='off'></textarea></td>
+                        placeholder='Paste notes...' autocomplete='off'></textarea></td>
             </tr>
             <tr>
                 <th></th>
                 <td>
                     <button id="sdr_submit"
-                            style="font-size:16px; padding: 10px 24px; border: 1px solid black; border-radius: 12px">
+                        style="font-size:16px; padding: 10px 24px; border: 1px solid black; border-radius: 12px">
                         <b>SUBMIT</b>
                     </button>
                     &nbsp;&nbsp;&nbsp;&nbsp;<b>Then COLD Conference using Speed Dials</b>
@@ -161,7 +176,7 @@
 <script>
     var leadComplianceValue = "No";
     var leadComplianceInput = "@Customer.LeadCompliance@";
-    if ( leadComplianceInput.search('Medicare Advantage Compliant') !== -1 ) {
+    if (leadComplianceInput.search('Medicare Advantage Compliant') !== -1) {
         leadComplianceValue = "Yes";
     }
     document.getElementById("ComVal").innerHTML = leadComplianceValue;
@@ -184,7 +199,7 @@
                         isq_notes: form_data
                     }
                 }
-//                console.log(payload)
+                //                console.log(payload)
                 let response = await fetch(hsvcBaseUrl + '/api/v1/contact_data', {
                     method: 'POST',
                     headers: {
